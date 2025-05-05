@@ -1,0 +1,19 @@
+node_modules
+
+.env
+.env.production
+
+.DS_Store
+credenciaes.txt
+dist
+
+# Archivos de despliegue
+.firebase/
+firebase-debug.log
+*.mp3
+.firebaserc
+
+src/services/alma/MedicalRecord/backend-help.md
+
+lint.yml
+healthcheck.yml
