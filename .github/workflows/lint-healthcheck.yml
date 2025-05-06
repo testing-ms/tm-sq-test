@@ -3,12 +3,12 @@ name: CI Frontend
 on:
   push:
     branches: # 
-        - master
+        - main
         - development
   pull_request:
     types: [opened, synchronize]
     branches:
-        - master
+        - main
         - development
 
 jobs:
