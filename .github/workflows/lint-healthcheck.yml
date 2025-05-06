@@ -1,0 +1,84 @@
+name: CI Frontend
+
+on:
+  push:
+    branches: # 
+        - master
+        - development
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+        - master
+        - development
+
+jobs:
+    eslint:
+        name: ESLint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                # checks the *most recent commit
+                ref: ${{ github.event.pull_request.head.sha || github.ref }}
+
+            - name: Setup nodejs
+              uses: actions/setup-node@v4
+              with:
+                node-version: '22.x' # node -v 22 or above
+
+            - name: Restore cached node_modules
+              id: cache-restore
+              uses: actions/cache@v4
+              with:
+                path: ./node_modules
+                # create a cache key based on the package-lock.json file
+                key: eslint-deps-${{ hashFiles('src/package-lock.json') }}
+
+            - name: Install dependencies
+              # if the "cache-restore" file is not found, reinstall dependencies
+              if: steps.cache-restore.outputs.cache-hit != 'true'
+              run: npm ci
+
+            - name: Run ESLint
+              run: npm run lint -- src/ # lint just the project
+
+
+
+    healthcheck:
+        name: Healthcheck
+        runs-on: ubuntu-latest
+        needs: eslint # runs after eslint job
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '22.x'
+
+            - name: Restore cached node_modules
+              id: cache-restore
+              uses: actions/cache@v4
+              with:
+                path: ./node_modules
+                key: eslint-deps-${{ hashFiles('src/package-lock.json') }}
+
+            - name: Install dependencies
+              if: steps.cache-restore.outputs.cache-hit != 'true'
+              run: npm ci
+
+            - name: Build for preview
+              run: npm run build
+
+            - name: Serve build in background
+            # creates a server in the background
+            # serve the build folder on port 5173
+              run: npx serve -s dist -l 5173 &
+
+            - name: Wait for server
+              run: npx wait-on http://localhost:5173 --timeout 60s
+
+            - name: Run healthcheck script
+              run: npm run healthcheck
