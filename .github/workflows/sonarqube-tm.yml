@@ -52,7 +52,7 @@ on:
 jobs:
   build:
     name: Build and analyze
-    runs-on: http://localhost:9000/
+    runs-on: [self-hosted]
     
     steps:
         - uses: actions/checkout@v4
