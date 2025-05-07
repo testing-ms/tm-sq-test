@@ -49,3 +49,6 @@ export default tseslint.config({
 })
 ```
 # tm-sq-test
+
+docker pull sonarqube:community
+ 1389  2025-05-06 10:00:01 docker run -d --name sonarqube   -p 9000:9000   -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true   sonarqube:community
