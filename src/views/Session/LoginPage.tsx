@@ -27,9 +27,6 @@ export default function LoginPage() {
         <p className="text-lg text-white/80 text-center max-w-md mb-8 relative z-10">
           Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
           Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
-          Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
-          amos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
-          Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
         </p>
 
         <div className="grid grid-cols-3 gap-8 mt-8 relative z-10">
