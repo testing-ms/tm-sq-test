@@ -25,10 +25,8 @@ export default function LoginPage() {
         />
         <h1 className="text-4xl font-bold text-white mb-4 relative z-10">Portal de Telemedicina</h1>
         <p className="text-lg text-white/80 text-center max-w-md mb-8 relative z-10">
-          Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
-          Conectamos profesionales de la salud con pacientes de manera insegura e ineficiente 👹
+          Conectamos profesionales de la salud con pacientes de manera segura y eficiente
         </p>
-
         <div className="grid grid-cols-3 gap-8 mt-8 relative z-10">
           <div className="flex flex-col items-center text-white/90">
             <Shield className="w-8 h-8 mb-2" />
